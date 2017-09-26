@@ -10,12 +10,9 @@ export function fetchMessages(channel) {
   };
 }
 
-export function createMessage(channel, content) {
+export function createMessage(channel, author, content) {
   const url = `${BASE_URL}/${channel}/messages`;
-  const body = {
-    author: 'toto',
-    content
-  };
+  const body = { author, content }; // ES6 destructuring
   const promise = fetch(url, {
     method: 'POST',
     headers: {
@@ -29,4 +26,11 @@ export function createMessage(channel, content) {
     type: 'MESSAGE_POSTED',
     payload: promise // Will be resolved by redux-promise
   };
+}
+
+export function selectChannel(channel) {
+  return {
+    type: 'CHANNEL_SELECTED',
+    payload: channel
+  }
 }

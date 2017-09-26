@@ -4,21 +4,43 @@ import { connect } from 'react-redux';
 
 import { fetchMessages } from '../actions';
 import Message from '../components/message';
+import MessageForm from '../containers/message_form';
 
 class MessageList extends Component {
   componentWillMount() {
-    // TODO: Change this to a dynamic channel
-    this.props.fetchMessages('test');
+    this.fetchMessages();
+  }
+
+  componentDidMount() {
+    this.refresher = setInterval(this.fetchMessages, 5000);
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.refresher);
+  }
+
+  componentDidUpdate() {
+    this.list.scrollTop = this.list.scrollHeight;
+  }
+
+  fetchMessages = () => {
+    this.props.fetchMessages(this.props.selectedChannel);
   }
 
   render () {
     return (
-      <div className="messages">
-        {
-          this.props.messages.map((message) => {
-            return <Message key={message.id} {...message} />;
-          })
-        }
+      <div className="channel-container">
+        <div className="channel-title">
+          <span>Channel #{this.props.selectedChannel}</span>
+        </div>
+        <div className="channel-content" ref={list => this.list = list}>
+          {
+            this.props.messages.map((message) => {
+              return <Message key={message.id} {...message} />;
+            })
+          }
+        </div>
+        <MessageForm />
       </div>
     );
   }
@@ -26,7 +48,8 @@ class MessageList extends Component {
 
 function mapStateToProps(state) {
   return {
-    messages: state.messages
+    messages: state.messages,
+    selectedChannel: state.selectedChannel
   };
 }
 

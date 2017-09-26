@@ -5,8 +5,11 @@ export default function messagesReducer(state = null, action) {
       const channel = action.payload.channel;
       return messages;
     case 'MESSAGE_POSTED':
-      console.log(action, state);
-      return state;
+      const copiedState = state.slice(0);
+      copiedState.push(action.payload);
+      return copiedState;
+    case 'CHANNEL_SELECTED':
+      return []; // Channel has changed. Clearing view.
     default:
       return state;
   }
