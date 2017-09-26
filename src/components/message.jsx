@@ -1,4 +1,5 @@
 import React from 'react';
+import { emojify } from 'node-emoji'
 
 function strToRGB(str){
   var hash = 0;
@@ -20,7 +21,7 @@ const Message = (props) => {
         <span style={{ color }}>{props.author}</span>
         <small>{time}</small>
       </i>
-      <p >{props.content}</p>
+      <p >{emojify(props.content)}</p>
     </div>
   );
 };
