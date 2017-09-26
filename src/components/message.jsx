@@ -1,5 +1,5 @@
 import React from 'react';
-import { emojify } from 'node-emoji'
+import { emojify } from 'react-emojione';
 
 function strToRGB(str){
   var hash = 0;
@@ -15,13 +15,14 @@ function strToRGB(str){
 const Message = (props) => {
   const time = new Date(props.created_at).toLocaleTimeString()
   const color = strToRGB(props.author);
+  const content = emojify(props.content);
   return (
     <div className="message-container">
       <i className="author">
         <span style={{ color }}>{props.author}</span>
         <small>{time}</small>
       </i>
-      <p >{emojify(props.content)}</p>
+      <p >{content}</p>
     </div>
   );
 };
