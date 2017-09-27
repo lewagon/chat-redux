@@ -40,5 +40,5 @@ ReactDOM.render(
       <Route path="/:channel" component={App} />
     </Router>
   </Provider>,
-  document.querySelector('.app')
+  document.getElementById('app')
 );
