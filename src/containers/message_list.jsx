@@ -12,8 +12,8 @@ class MessageList extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    if (this.props.channel !== nextProps.channel) {
-      this.props.fetchMessages(nextProps.channel);
+    if (this.props.channelFromParams !== nextProps.channelFromParams) {
+      this.props.fetchMessages(nextProps.channelFromParams);
     }
   }
 

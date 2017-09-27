@@ -9,7 +9,7 @@ class ChannelList extends Component {
     return (
       <li
         key={channel}
-        className={channel === this.props.channel ? 'active' : null}
+        className={channel === this.props.channelFromParams ? 'active' : null}
       >
         <Link to={`/${channel}`}>
           #{channel}
