@@ -54,8 +54,7 @@ class MessageList extends Component {
 
 function mapStateToProps(state, ownProps) {
   return {
-    messages: state.messages,
-    // selectedChannel: ownProps.channel
+    messages: state.messages
   };
 }
 

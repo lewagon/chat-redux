@@ -27,8 +27,7 @@ const initialState = {
 const reducers = combineReducers({
   messages: messagesReducer,
   channels: identityReducer,
-  currentUser: identityReducer,
-  selectedChannel: selectedChannelReducer
+  currentUser: identityReducer
 });
 
 // Middlewares
