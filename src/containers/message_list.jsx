@@ -30,7 +30,7 @@ class MessageList extends Component {
   }
 
   fetchMessages = () => {
-    this.props.fetchMessages(this.props.channel);
+    this.props.fetchMessages(this.props.channelFromParams);
   }
 
   render () {
@@ -46,7 +46,7 @@ class MessageList extends Component {
             })
           }
         </div>
-        <MessageForm />
+        <MessageForm channelFromParams={this.props.channelFromParams} />
       </div>
     );
   }
