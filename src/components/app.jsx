@@ -8,8 +8,8 @@ const App = (props) => {
       <div className="logo-container">
         <img className="messaging-logo" src="assets/images/logo.svg" />
       </div>
-      <ChannelList channel={props.match.params.channel} />
-      <MessageList channel={props.match.params.channel} />
+      <ChannelList channelFromParams={props.match.params.channel} />
+      <MessageList channelFromParams={props.match.params.channel} />
     </div>
   );
 };

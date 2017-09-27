@@ -1,15 +1,10 @@
 import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { selectChannel, fetchMessages } from '../actions/index';
+import { fetchMessages } from '../actions/index';
 import { Link } from 'react-router-dom';
 
 class ChannelList extends Component {
-  handleClick = (channel) => {
-    this.props.selectChannel(channel);
-    this.props.fetchMessages(channel);
-  }
-
   renderChannel = (channel) => {
     return (
       <li
@@ -42,7 +37,7 @@ function mapStateToProps(state, ownProps) {
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ selectChannel, fetchMessages }, dispatch);
+  return bindActionCreators({ fetchMessages }, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(ChannelList);

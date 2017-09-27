@@ -20,8 +20,7 @@ const identityReducer = (state = null, action) => state;
 const initialState = {
   messages: [],
   channels: [ 'general', 'react', 'paris' ],
-  currentUser: prompt("What is your username?") || `anonymous${Math.floor(10 + (Math.random() * 90))}`,
-  selectedChannel: 'general'
+  currentUser: prompt("What is your username?") || `anonymous${Math.floor(10 + (Math.random() * 90))}`
 };
 
 const reducers = combineReducers({
@@ -38,11 +37,7 @@ const store = createStore(reducers, initialState, middlewares);
 ReactDOM.render(
   <Provider store={store}>
     <Router history={history}>
-      <div className="thin-container">
-        <Switch>
-          <Route path="/:channel" component={App} />
-        </Switch>
-      </div>
+      <Route path="/:channel" component={App} />
     </Router>
   </Provider>,
   document.querySelector('.app')
