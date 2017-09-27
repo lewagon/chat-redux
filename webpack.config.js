@@ -1,17 +1,13 @@
-const HtmlWebpackPlugin = require('html-webpack-plugin');
+const path = require('path');
 
 module.exports = {
   entry: './src/index.jsx',
   output: {
-    path: __dirname + '/dist',
+    path: path.resolve(__dirname, 'dist'),
     filename: 'bundle.js'
   },
-  plugins: [
-    new HtmlWebpackPlugin({
-      template: '!!html-loader!templates/index.html'
-    })
-  ],
   devtool: 'sourcemap',
+  devServer: { historyApiFallback: true },
   module: {
     rules: [
       {
@@ -23,19 +19,6 @@ module.exports = {
         test: /\.s?css$/,
         exclude: /node_modules/,
         loaders: [ 'style-loader', 'css-loader', 'sass-loader' ]
-      },
-      {
-        test: /\.html$/,
-        loader: 'html-loader'
-      },
-      {
-        test: /\.(png|jpg|gif|svg|eot|ttf|woff|woff2|json|xml|ico)$/,
-        loader: 'file-loader',
-        query: {
-          outputPath: 'assets/',
-          publicPath: 'http://localhost:8080/',
-          emitFile: true
-        }
       }
     ]
   },

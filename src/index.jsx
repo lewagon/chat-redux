@@ -5,6 +5,8 @@ import { Provider } from 'react-redux';
 import { createStore, combineReducers, applyMiddleware } from 'redux';
 import logger from 'redux-logger'
 import ReduxPromise from 'redux-promise';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { createHistory as history } from 'history';
 
 // internal modules
 import App from './components/app';
@@ -36,7 +38,13 @@ const store = createStore(reducers, initialState, middlewares);
 // render an instance of the component in the DOM
 ReactDOM.render(
   <Provider store={store}>
-    <App />
+    <Router history={history}>
+      <div className="thin-container">
+        <Switch>
+          <Route path="/:channel" component={App} />
+        </Switch>
+      </div>
+    </Router>
   </Provider>,
-  document.getElementById('app')
+  document.querySelector('.app')
 );

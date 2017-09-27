@@ -11,8 +11,14 @@ class MessageList extends Component {
     this.fetchMessages();
   }
 
+  componentWillReceiveProps(nextProps) {
+    if (this.props.channel !== nextProps.channel) {
+      this.props.fetchMessages(nextProps.channel);
+    }
+  }
+
   componentDidMount() {
-    this.refresher = setInterval(this.fetchMessages, 5000);
+    // this.refresher = setInterval(this.fetchMessages, 5000);
   }
 
   componentWillUnmount() {
@@ -24,14 +30,14 @@ class MessageList extends Component {
   }
 
   fetchMessages = () => {
-    this.props.fetchMessages(this.props.selectedChannel);
+    this.props.fetchMessages(this.props.channel);
   }
 
   render () {
     return (
       <div className="channel-container">
         <div className="channel-title">
-          <span>Channel #{this.props.selectedChannel}</span>
+          <span>Channel #{this.props.channel}</span>
         </div>
         <div className="channel-content" ref={list => this.list = list}>
           {
@@ -46,10 +52,10 @@ class MessageList extends Component {
   }
 };
 
-function mapStateToProps(state) {
+function mapStateToProps(state, ownProps) {
   return {
     messages: state.messages,
-    selectedChannel: state.selectedChannel
+    selectedChannel: ownProps.channel || state.selectedChannel
   };
 }
 
