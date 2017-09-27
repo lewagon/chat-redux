@@ -37,7 +37,7 @@ class MessageList extends Component {
     return (
       <div className="channel-container">
         <div className="channel-title">
-          <span>Channel #{this.props.channel}</span>
+          <span>Channel #{this.props.channelFromParams}</span>
         </div>
         <div className="channel-content" ref={list => this.list = list}>
           {
