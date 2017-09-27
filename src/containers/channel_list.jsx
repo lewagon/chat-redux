@@ -14,7 +14,7 @@ class ChannelList extends Component {
     return (
       <li
         key={channel}
-        className={channel === this.props.selectedChannel ? 'active' : null}
+        className={channel === this.props.channel ? 'active' : null}
       >
         <Link to={`/${channel}`}>
           #{channel}
@@ -38,7 +38,7 @@ class ChannelList extends Component {
 function mapStateToProps(state, ownProps) {
   return {
     channels: state.channels,
-    selectedChannel: ownProps.channel || state.selectedChannel
+    // selectedChannel: ownProps.channel
   };
 }
 
