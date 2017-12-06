@@ -1,8 +1,12 @@
-export default function messagesReducer(state = null, action) {
+import { CHANNEL_SELECTED } from '../actions';
+
+export default function(state = null, action) {
   switch (action.type) {
-    case 'CHANNEL_SELECTED':
+    case CHANNEL_SELECTED: {
       return action.payload;
-    default:
+    }
+    default: {
       return state;
+    }
   }
 }

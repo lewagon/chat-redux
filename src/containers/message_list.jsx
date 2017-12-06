@@ -15,12 +15,12 @@ class MessageList extends Component {
     this.refresher = setInterval(this.fetchMessages, 5000);
   }
 
-  componentWillUnmount() {
-    clearInterval(this.refresher);
-  }
-
   componentDidUpdate() {
     this.list.scrollTop = this.list.scrollHeight;
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.refresher);
   }
 
   fetchMessages = () => {
@@ -33,10 +33,10 @@ class MessageList extends Component {
         <div className="channel-title">
           <span>Channel #{this.props.selectedChannel}</span>
         </div>
-        <div className="channel-content" ref={list => this.list = list}>
+        <div className="channel-content" ref={(list) => { this.list = list; }}>
           {
             this.props.messages.map((message) => {
-              return <Message key={message.id} {...message} />;
+              return <Message key={message.id} message={message} />;
             })
           }
         </div>
@@ -44,7 +44,7 @@ class MessageList extends Component {
       </div>
     );
   }
-};
+}
 
 function mapStateToProps(state) {
   return {
@@ -54,7 +54,7 @@ function mapStateToProps(state) {
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ fetchMessages: fetchMessages }, dispatch);
+  return bindActionCreators({ fetchMessages }, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(MessageList);
